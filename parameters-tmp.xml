@@ -1,0 +1,161 @@
+<?xml version="1.0"?>
+<!-- THIS FILE SPECIFIES PARAMETERS -->
+<params>
+	<Simulation>
+		<endTime>960.0</endTime><!--minutes-->
+		<timeSlice_s>20</timeSlice_s><!--seconds-->
+		<sampleTimeSlice_s>300</sampleTimeSlice_s><!--seconds-->
+		<zstacks>false</zstacks><!--boolean-->
+
+		<environment>well</environment><!--{topCube, topBottomCube, well}-->
+	</Simulation>
+
+	<Neutrophils>
+		<numNeutrophils></numNeutrophils>
+	</Neutrophils>
+
+	<TCells>
+		<numTCells>5000</numTCells> <!--44000-->
+		<!--{None, WithinBolus, Relay, BolusCentre, WithinBolusGradientCentre}-->
+		<secretionMode>WithinBolusGradientCentre</secretionMode>
+		<relayActivationAttractionThreshold>10.0</relayActivationAttractionThreshold>
+
+		<attractantSecretionRate>666</attractantSecretionRate><!--per min-->
+		<chemotaxisConcentrationLocation>1e-20</chemotaxisConcentrationLocation>
+		<chemotaxisConcentrationShape>4</chemotaxisConcentrationShape>
+
+		<chemoSensitivityCone>45</chemoSensitivityCone><!--degrees, converted to radians internally-->
+	</TCells>
+
+	<Attractant>
+		<halflife>Infinity</halflife>
+		<diffusion>2.5e2</diffusion>
+	</Attractant>
+
+	<Environment>
+		<!--Collision detection is very computationally costly-->
+		<intercellularCollisionDetection>false</intercellularCollisionDetection>
+		<secretorMotilityMode>Stationary</secretorMotilityMode><!--{Stationary, Motile}-->
+		<BoundedCylinder>
+			<radius>3400</radius><!--3400--><!--in um-->
+			<depth>60</depth><!--in um-->
+			<bolus>
+				<present>true</present><!--boolean-->
+				<bolusTCells>false</bolusTCells><!--boolean-->
+				<radius>1200</radius><!--um-->
+				<bolusSpeed>0.66</bolusSpeed><!--[0, 1]-->
+			</bolus>
+		</BoundedCylinder>
+		<BoundedCube>
+			<width>390</width><!--in um-->
+			<height></height><!--in um. If blank, use width-->
+			<depth>65</depth><!--in um-->
+			<bufferSize>0.0</bufferSize>
+			<follicleRatio>0.0</follicleRatio>
+		</BoundedCube>
+	</Environment>
+
+	<Recording><!--What gets written to file system-->
+		<mode>slice</mode><!--{volume, slice, unbounded}-->
+		<sliceZ>30</sliceZ><!-->0um, where the slice is located in z-->
+		<sliceDepth>1</sliceDepth><!-->0um-->
+	</Recording>
+
+	<GUI>
+		<cellScalar>4.0</cellScalar><!--magnify cells by this factor when drawing them-->
+		<visualisationMode>volume</visualisationMode><!--{volume, slice, none}-->
+		<recordZSlices>false</recordZSlices><!--Boolean, snap shots for z slices-->
+	</GUI>
+
+	<Motility>
+		<paradigm>BootstrapDynamic</paradigm>
+
+		<Bootstrap>
+			<blockLength>30</blockLength><!--increments-->
+			<mode>pitchRoll</mode><!--{pitch, pitchRoll, orientation}-->
+			<fixedSourceTrack>false</fixedSourceTrack><!--{true, false}-->
+			<source>bootstrap_sources/no_attraction/_Position.csv</source>
+			<!--<source>../imaris/no_attraction/CTLsAlone_Feb2016/combined/_Position.csv</source>--><!--location on filesystem, can also be suppled as cmd line argument-->
+		</Bootstrap>
+		<BootstrapGradient><!--other parameters inherrited from Bootstrap-->
+			<source>bootstrap_sources/positive_attraction/_Position.csv</source>
+			<gradient_x>-1</gradient_x><!--vector points towards (up) gradient-->
+			<gradient_y>0</gradient_y>
+			<gradient_z>0</gradient_z>
+		</BootstrapGradient>
+		<Ballistic>
+			<speed>5.0</speed>
+		</Ballistic>
+		<Brownian>
+			<speedStD>10.0</speedStD>
+		</Brownian>
+		<!--Levy distributions with variable power law decays-->
+		<LevyFlight>
+			<restMu>0.0</restMu>
+			<restScale>1.0</restScale>
+			<motileMu>0.0</motileMu>
+			<motileScale>1.0</motileScale>
+			<speedMu>0.0</speedMu>
+			<speedScale>1.0</speedScale>
+		</LevyFlight>
+		<HomogeneousCRW_Orientation>
+			<pitchRateMean>0.5</pitchRateMean>
+			<pitchRateStd>0.35</pitchRateStd>
+			<rollRateMean>-1.0</rollRateMean>
+			<rollRateStd>0</rollRateStd>
+		</HomogeneousCRW_Orientation>
+		<HeterogeneousCRW_Orientation>
+			<pitchM_Mean>1.0</pitchM_Mean>
+			<pitchM_StD>1.0</pitchM_StD>
+			<pitchS_Mean>1.0</pitchS_Mean>
+			<pitchS_StD>1.0</pitchS_StD>
+
+			<rollM_Mean>-1.0</rollM_Mean>
+			<rollM_StD>0</rollM_StD>
+			<rollS_Mean>-1.0</rollS_Mean>
+			<rollS_StD>0</rollS_StD>
+		</HeterogeneousCRW_Orientation>
+
+		<HomogeneousCRW_Translation>
+			<speedMean>5.0</speedMean>
+			<speedStD>0.0</speedStD>
+		</HomogeneousCRW_Translation>
+		<HeterogeneousCRW_Translation>
+			<speedM_Mean>6.2</speedM_Mean>
+			<speedM_StD>4.0</speedM_StD>
+			<speedS_Mean>0.875</speedS_Mean>
+			<speedS_StD>0.37</speedS_StD>
+		</HeterogeneousCRW_Translation>
+		<InverseHomogeneousCRW>
+			<speedMean>5.95</speedMean>
+			<speedStD>8.5</speedStD>
+
+			<pitchRateMean>2.65</pitchRateMean>
+			<pitchRateStd>1.5</pitchRateStd>
+			<rollRateMean>-1.0</rollRateMean>
+			<rollRateStd>0</rollRateStd>
+
+			<corr>1.0</corr>
+			<attack>0.55</attack>
+		</InverseHomogeneousCRW>
+		<InverseHeterogeneousCRW>
+			<speedM_Mean>10.0</speedM_Mean>
+			<speedM_StD>0.0</speedM_StD>
+			<speedS_Mean>10.0</speedS_Mean>
+			<speedS_StD>0.0</speedS_StD>
+
+			<pitchM_Mean>10.0</pitchM_Mean>
+			<pitchM_StD>0.0</pitchM_StD>
+			<pitchS_Mean>10.0</pitchS_Mean>
+			<pitchS_StD>0.0</pitchS_StD>
+
+			<rollM_Mean>-1.0</rollM_Mean>
+			<rollM_StD>0</rollM_StD>
+			<rollS_Mean>-1.0</rollS_Mean>
+			<rollS_StD>0</rollS_StD>
+
+			<attack>0.5</attack>
+			<corr>1.0</corr>
+		</InverseHeterogeneousCRW>
+	</Motility>
+</params>

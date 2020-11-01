@@ -1,0 +1,191 @@
+<?xml version="1.0"?>
+<!-- THIS FILE SPECIFIES PARAMETERS -->
+<params>
+	<Simulation>
+		<endTime>60.0</endTime><!--minutes-->
+		<timeSlice_s>20</timeSlice_s><!--seconds-->
+		<sampleTimeSlice_s>20</sampleTimeSlice_s><!--seconds-->
+		<zstacks>false</zstacks><!--boolean-->
+
+		<environment>well</environment>
+	</Simulation>
+
+	<ChemotacticAgent>
+		<numAgents>500</numAgents>
+		<!--{UNRESPONSIVE, HOMOGENEOUS_ATTRACTION, HETEROGENEOUS_ATTRACTION, REPULSED}-->
+		<motileResponseMode>UNRESPONSIVE</motileResponseMode>
+
+		<!--{NO_SECRETION, SECRETION}-->
+		<bolusResponseMode>NO_SECRETION</bolusResponseMode>
+
+		<attractantSecretionRate>666</attractantSecretionRate><!--molecules per min-->
+		<chemokineConcentrationResponseThreshold>1e-3</chemokineConcentrationResponseThreshold>
+
+	</ChemotacticAgent>
+	<Neutrophil>
+		<numNeutrophils>100</numNeutrophils>
+		<burn>True</burn>
+		<burnTime>0.0</burnTime>
+		<follicleRatio>0.1</follicleRatio>
+
+		<diameter>7.0</diameter>
+
+		<attractantStimulated_AttractantThreshold>0.3</attractantStimulated_AttractantThreshold>
+		<ltb4Stimualted_AttractantThreshold>1</ltb4Stimualted_AttractantThreshold>
+		<ltb4Stimualted_LTB4Threshold>1e-4</ltb4Stimualted_LTB4Threshold>
+		<ltb4SecretionRate>40000.0</ltb4SecretionRate><!--molecules/min-->
+
+		<perceptionCone>1.04</perceptionCone>
+	</Neutrophil>
+	<TCells>
+		<numTCells>130</numTCells>
+		<secretionMode>None</secretionMode><!--{None, WithinBolus, Relay}-->
+		<diameter>12.0</diameter>
+
+		<attractantSecretionRate>666</attractantSecretionRate><!--per min-->
+		<chemotaxisConcentrationLocation>1e-2</chemotaxisConcentrationLocation>
+		<chemotaxisConcentrationShape>4</chemotaxisConcentrationShape>
+
+		<chemoSensitivityCone>45</chemoSensitivityCone><!--degrees, converted to radians internally-->
+	</TCells>
+
+	<Attractant>
+		<halflife>Infinity</halflife><!--'Infinity' or double-->
+		<diffusion>2.5e2</diffusion><!--um^2/s-->
+		<diffusion>1e0</diffusion><!--um^2/s-->
+	</Attractant>
+	<LTB4>
+		<halflife>Infinity</halflife><!--'Infinity' or double-->
+		<diffusion>2.5e2</diffusion><!--um^2/s-->
+	</LTB4>
+
+	<Environment>
+		<BoundedCylinder>
+			<radius>400</radius><!--in um-->
+			<depth>60</depth><!--in um-->
+			<bolus>
+				<present>true</present><!--boolean-->
+				<bolusTCells>false</bolusTCells><!--boolean-->
+				<radius>133</radius><!--um-->
+				<bolusSpeed>0.66</bolusSpeed><!--[0, 1]-->
+			</bolus>
+		</BoundedCylinder>
+		<BoundedCube>
+			<width>390</width><!--in um-->
+			<height></height><!--in um. If blank, use width-->
+			<depth>65</depth><!--in um-->
+			<bufferSize>0.0</bufferSize>
+			<follicleRatio>0.0</follicleRatio>
+		</BoundedCube>
+	</Environment>
+
+	<Swarm>
+		<!--How many cells, lying with the given distance (multiple of diameter)
+		of one another, constitute a swarm-->
+		<swarmConstituentNumberCriteria>4</swarmConstituentNumberCriteria>
+		<swarmConstituentProximityCriteria>1.5</swarmConstituentProximityCriteria>
+	</Swarm>
+
+	<Recording>
+		<mode>volume</mode><!--{volume, slice, unbounded}-->
+		<sliceZ>30</sliceZ><!-->0um, where the slice is located in z-->
+		<sliceDepth>7</sliceDepth><!-->0um-->
+	</Recording>
+
+	<GUI>
+		<cellScalar>1.0</cellScalar><!--magnify cells by this factor when drawing them-->
+		<visualisationMode>slice</visualisationMode><!--{volume, slice}-->
+	</GUI>
+
+	<Motility>
+		<paradigm>Brownian</paradigm>
+
+		<Bootstrap>
+			<blockLength>30</blockLength><!--increments-->
+			<mode>pitchRoll</mode><!--{pitch, pitchRoll, orientation}-->
+			<fixedSourceTrack>false</fixedSourceTrack><!--{true, false}-->
+			<source>bootstrap_sources/no_attraction/_Position.csv</source>
+			<!--<source>../imaris/no_attraction/CTLsAlone_Feb2016/combined/_Position.csv</source>--><!--location on filesystem, can also be suppled as cmd line argument-->
+		</Bootstrap>
+		<BootstrapGradient><!--other parameter inherrited from Bootstrap-->
+			<source>bootstrap_sources/no_attraction/_Position.csv</source>
+			<gradient_x>-1</gradient_x><!--vector points towards (up) gradient-->
+			<gradient_y>0</gradient_y>
+			<gradient_z>0</gradient_z>
+		</BootstrapGradient>
+		<Ballistic>
+			<speed>5.0</speed>
+		</Ballistic>
+		<Brownian>
+			<speedStD>3.0</speedStD>
+		</Brownian>
+		<!--Levy distributions with variable power law decays-->
+		<LevyFlight>
+			<restMu>0.0</restMu>
+			<restScale>1.0</restScale>
+			<motileMu>0.0</motileMu>
+			<motileScale>1.0</motileScale>
+			<speedMu>0.0</speedMu>
+			<speedScale>1.0</speedScale>
+		</LevyFlight>
+		<HomogeneousCRW_Orientation>
+			<pitchRateMean>0.5</pitchRateMean>
+			<pitchRateStd>0.35</pitchRateStd>
+			<rollRateMean>-1.0</rollRateMean>
+			<rollRateStd>0</rollRateStd>
+		</HomogeneousCRW_Orientation>
+		<HeterogeneousCRW_Orientation>
+			<pitchM_Mean>1.0</pitchM_Mean>
+			<pitchM_StD>1.0</pitchM_StD>
+			<pitchS_Mean>1.0</pitchS_Mean>
+			<pitchS_StD>1.0</pitchS_StD>
+
+			<rollM_Mean>-1.0</rollM_Mean>
+			<rollM_StD>0</rollM_StD>
+			<rollS_Mean>-1.0</rollS_Mean>
+			<rollS_StD>0</rollS_StD>
+		</HeterogeneousCRW_Orientation>
+
+		<HomogeneousCRW_Translation>
+			<speedMean>5.0</speedMean>
+			<speedStD>0.0</speedStD>
+		</HomogeneousCRW_Translation>
+		<HeterogeneousCRW_Translation>
+			<speedM_Mean>6.2</speedM_Mean>
+			<speedM_StD>4.0</speedM_StD>
+			<speedS_Mean>0.875</speedS_Mean>
+			<speedS_StD>0.37</speedS_StD>
+		</HeterogeneousCRW_Translation>
+		<InverseHomogeneousCRW>
+			<speedMean>5.95</speedMean>
+			<speedStD>8.5</speedStD>
+
+			<pitchRateMean>2.65</pitchRateMean>
+			<pitchRateStd>1.5</pitchRateStd>
+			<rollRateMean>-1.0</rollRateMean>
+			<rollRateStd>0</rollRateStd>
+
+			<corr>1.0</corr>
+			<attack>0.55</attack>
+		</InverseHomogeneousCRW>
+		<InverseHeterogeneousCRW>
+			<speedM_Mean>10.0</speedM_Mean>
+			<speedM_StD>0.0</speedM_StD>
+			<speedS_Mean>10.0</speedS_Mean>
+			<speedS_StD>0.0</speedS_StD>
+
+			<pitchM_Mean>10.0</pitchM_Mean>
+			<pitchM_StD>0.0</pitchM_StD>
+			<pitchS_Mean>10.0</pitchS_Mean>
+			<pitchS_StD>0.0</pitchS_StD>
+
+			<rollM_Mean>-1.0</rollM_Mean>
+			<rollM_StD>0</rollM_StD>
+			<rollS_Mean>-1.0</rollS_Mean>
+			<rollS_StD>0</rollS_StD>
+
+			<attack>0.5</attack>
+			<corr>1.0</corr>
+		</InverseHeterogeneousCRW>
+	</Motility>
+</params>
