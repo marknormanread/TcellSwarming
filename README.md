@@ -9,7 +9,7 @@ Code relating to the 2020 eLife paper:
 > **eLife** (2020) 9:e56554. doi: 10.7554/eLife.56554
 > https://elifesciences.org/articles/56554
 
-Please cite this paper upon use of any code contained within this repository. We make it available under the GPLv3 licence. 
+Please cite this paper upon use of any code contained within this repository. We make it available under the GPL v3 licence. 
 
 Three modules are included for:
 
