@@ -4,9 +4,9 @@ Code relating to the 2020 eLife paper:
 
 >Cytotoxic T Cells Swarm by Homotypic Chemokine Signaling. 
 >
-> Jorge Luis Galeano Niño, Sophie V. Pageon, Szun S. Tay, Feyza Colakoglu, Daryan Kempe, Jack Hywood, Jessica K. Mazalo, James Cremasco, Matt A. Govendir, Laura F. Dagley, Kenneth Hsu, Simone Rizzetto, Jerzy Zieba, Gregory Rice, Victoria Prior, Geraldine O'Neill, Richard J. Williams, David R. Nisbet, Belinda Kramer, Andrew I. Webb, Fabio Luciani, Mark N. Read, and Maté Biro
+> *Jorge Luis Galeano Niño, Sophie V. Pageon, Szun S. Tay, Feyza Colakoglu, Daryan Kempe, Jack Hywood, Jessica K. Mazalo, James Cremasco, Matt A. Govendir, Laura F. Dagley, Kenneth Hsu, Simone Rizzetto, Jerzy Zieba, Gregory Rice, Victoria Prior, Geraldine O'Neill, Richard J. Williams, David R. Nisbet, Belinda Kramer, Andrew I. Webb, Fabio Luciani, Mark N. Read, and Maté Biro*
 >
-> eLife (2020) 9:e56554. doi: 10.7554/eLife.56554
+> **eLife** (2020) 9:e56554. doi: 10.7554/eLife.56554
 > https://elifesciences.org/articles/56554
 
 Please cite this paper upon use of any code contained within this repository. 
